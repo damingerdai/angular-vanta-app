@@ -2,21 +2,33 @@ import { HostListener } from '@angular/core';
 import { Component, ElementRef, OnDestroy, OnInit } from '@angular/core';
 import * as THREE from 'three';
 import BIRDS from 'vanta/dist/vanta.birds.min';
+import FOG from 'vanta/dist/vanta.fog.min';
+import WAVES from 'vanta/dist/vanta.waves.min';
+import CLOUDS from 'vanta/dist/vanta.clouds.min';
+import CLOUDS2 from 'vanta/dist/vanta.clouds2.min';
+import GLOBE from 'vanta/dist/vanta.globe.min';
+import NET from 'vanta/dist/vanta.net.min';
+import CELLS from 'vanta/dist/vanta.cells.min';
+import TRUNK from 'vanta/dist/vanta.trunk.min';
+import TOPOLOGY from 'vanta/dist/vanta.topology.min';
+import DOTS from 'vanta/dist/vanta.dots.min';
+import RINGS from 'vanta/dist/vanta.rings.min';
+import HALO from 'vanta/dist/vanta.halo.min';
 
 const VANTAS = [
-  'birds',
-  'fog',
-  'waves',
-  'clouds',
-  'clouds2',
-  'globe',
-  'net',
-  'cells',
-  'trunk',
-  'topology',
-  'dots',
-  'rings',
-  'halo',
+  BIRDS,
+  FOG,
+  WAVES,
+  CLOUDS,
+  CLOUDS2,
+  GLOBE,
+  NET,
+  CELLS,
+  TRUNK,
+  TOPOLOGY,
+  DOTS,
+  RINGS,
+  HALO
 ];
 
 @Component({
@@ -35,14 +47,15 @@ export class AppComponent implements OnInit, OnDestroy {
   }
 
   @HostListener('click')
-  protected async buildVantaEffect() {
+  protected buildVantaEffect() {
     try {
       const n = this.getRandomN();
-      const vanta = (await import(`vanta/dist/vanta.${VANTAS[n]}.min`)).default;
+      const vanta = VANTAS[n];
       this.vantaEffect = vanta({
         el: this.el.nativeElement,
         THREE: THREE, // use a custom THREE when initializing
       });
+      this.vantaEffect.resizes()
     } catch (err) {
       console.error(err);
       this.buildVantaEffect();
