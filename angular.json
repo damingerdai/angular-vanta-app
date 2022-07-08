@@ -144,6 +144,15 @@
             ],
             "scripts": []
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {
+            "baseHref": "https://damingerdai.github.io/angular-vanta-app/",
+            "build-target": "esbuild",
+            "name": "Angular StandaloneComponents App",
+            "email": "mingguobin@live.com"
+          }
         }
       }
     }
